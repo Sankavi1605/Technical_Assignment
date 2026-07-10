@@ -182,7 +182,7 @@ app.post('/api/chat', authenticate, isManager, async (req, res) => {
       FROM Reports r 
       JOIN Projects p ON r.project_id = p.id
       JOIN Users u ON r.user_id = u.id
-      WHERE r.created_at >= date("now", "-7 days")
+      WHERE r.created_at >= date('now', '-7 days')
     `).all();
 
     const systemPrompt = `You are the Workspace AI Assistant for managers. You answer questions about team activity concisely.
@@ -200,8 +200,9 @@ Answer the user's question concisely based ONLY on the context provided. If the 
 
     res.json({ reply: response.text });
   } catch (error) {
-    console.error("AI Error:", error);
-    res.json({ reply: "I'm sorry, I encountered an error connecting to the AI service." });
+    console.error("AI Error details:", error?.status, error?.message || error);
+    const errMsg = error?.message || 'Unknown error';
+    res.json({ reply: `⚠️ AI service error: ${errMsg}. Please try again in a moment.` });
   }
 });
 
