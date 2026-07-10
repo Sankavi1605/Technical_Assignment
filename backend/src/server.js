@@ -192,7 +192,7 @@ ${JSON.stringify(recentReports, null, 2)}
 Answer the user's question concisely based ONLY on the context provided. If the information isn't in the context, say so. Format your answer with markdown if appropriate (e.g. bolding names or projects).`;
 
     const response = await ai.models.generateContent({
-      model: 'gemini-flash-latest',
+      model: 'gemini-3.1-flash-lite',
       contents: [
         { role: 'user', parts: [{ text: systemPrompt + "\n\nUser Question: " + message }] }
       ]
