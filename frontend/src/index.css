@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+.liquid-glass {
+  background-color: rgba(255, 255, 255, 0.01);
+  backdrop-filter: blur(4px);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.1);
+}
+
+.liquid-glass-strong {
+  background-color: rgba(255, 255, 255, 0.01);
+  backdrop-filter: blur(50px);
+}
