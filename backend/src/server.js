@@ -137,9 +137,9 @@ app.get('/api/dashboard', authenticate, isManager, (req, res) => {
   const totalReports = db.prepare('SELECT count(*) as count FROM Reports').get().count;
   
   const userCount = db.prepare("SELECT count(*) as count FROM Users WHERE role='MEMBER'").get().count;
-  const recentReports = db.prepare('SELECT count(*) as count FROM Reports WHERE created_at >= date("now", "-7 days")').get().count;
+  const recentReports = db.prepare(`SELECT count(*) as count FROM Reports WHERE created_at >= date('now', '-7 days')`).get().count;
   
-  const activeMembersThisWeek = db.prepare('SELECT count(DISTINCT user_id) as count FROM Reports WHERE created_at >= date("now", "-7 days")').get().count;
+  const activeMembersThisWeek = db.prepare(`SELECT count(DISTINCT user_id) as count FROM Reports WHERE created_at >= date('now', '-7 days')`).get().count;
   const complianceRate = userCount > 0 ? Math.round((activeMembersThisWeek / userCount) * 100) : 0;
   
   const openBlockers = db.prepare("SELECT count(*) as count FROM Reports WHERE blockers != '' AND blockers IS NOT NULL").get().count;
